@@ -25,16 +25,18 @@ const Dashboard = () => {
 
   return (
     <div className="App">
-      <h1>Dashboard</h1>
-
-      <Jumbotron>
+      
+    <div className="pr-2 pl-2 pb-2 pt-5 " >
+      <Jumbotron >
         <h1 className="display-4">Welcome to Code.Hub Dashboard!</h1>
         <h3 className="lead">
           <strong>Manage everything and have fun!</strong>
         </h3>
-        
+         
         
       </Jumbotron>
+
+      </div> 
 
       <Row >
         {stats.length > 0 &&
@@ -54,7 +56,7 @@ const Dashboard = () => {
         <thead>
         <tr>
         <td colSpan="6" >
-          Last 5 Courses:
+          Last 4 Courses:
           </td>
         
         </tr>
