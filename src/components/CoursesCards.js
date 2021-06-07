@@ -24,7 +24,7 @@ const CoursesCards = ({title, imagePath, price, dates,duration,description}) => 
             </CardBody>
             <img width="100%" src={imagePath} alt="Card image cap" />
             <CardBody>
-                <CardText>Price: {price.normal} | Bookable: €  ✅ </CardText>
+                <CardText>Price: {price.normal} | Bookable: €  ✔ </CardText>
                 <CardTitle>{duration} </CardTitle>
                 <CardTitle >{dates.start_date}  </CardTitle>
                 
