@@ -27,7 +27,7 @@ const Header = () => {
           <NavLink tag={Link} to="/courses">Courses</NavLink>
         </NavItem>
         <NavItem className="" >
-          <NavLink tag={Link} to="/courses">Add New Course</NavLink>
+          <NavLink tag={Link} to="/add-course">Add New Course</NavLink>
         </NavItem>
         </Nav>
       </Collapse>

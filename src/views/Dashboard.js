@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Card, CardTitle, Jumbotron, Button, Table, Row, Col, } from "reactstrap";
+import { Jumbotron, Button, Table, Row, Col, } from "reactstrap";
 import CoursesTable from '../components/CoursesTable';
-import { fetchStats, fetchCourses } from '../api';
+import { fetchStats, fetchCourses,} from '../api';
 import {Link} from "react-router-dom";
+import Loader from '../components/Loader'
+import Stats from "../components/Stats";
+
 
 
 
@@ -39,24 +42,33 @@ const Dashboard = () => {
       </div> 
 
       <Row >
-        {stats.length > 0 &&
+      
+        {stats.length ? (
           stats.map(({ id, title, amount }) => (
-            <Col className="pr-5 pl-5 pb-5 pt-5 ">
-              <Card >
-                <Card body>
-                  <CardTitle key={id} >{title.toUpperCase()} : {amount}</CardTitle>
-                </Card>
-              </Card>
+            
+            <Col key={id} className="pr-5 pl-5 pb-5 pt-5 " xs={12} sm={6} md={3}>
+                  <Stats  title={title} amount= {amount} />
             </Col>
-          ))}
+            
+            
+          ))
+        ) : (
+          <Col xs={12}>
+            <Loader />
+          </Col>
+        
+        )}
+          
       </Row>
+      
 
       <Table>
+      
         
         <thead>
         <tr>
         <td colSpan="6" >
-          Last 4 Courses:
+          Last 5 Courses:
           </td>
         
         </tr>
@@ -77,7 +89,7 @@ const Dashboard = () => {
             
           <tr >
             <td colSpan="6" >
-              <Button tag={Link} to="/courses" className="float-right" color="primary">View All  </Button>
+              <Button tag={Link} to="/courses" className="float-right" color="primary">View All</Button>
               
             
 

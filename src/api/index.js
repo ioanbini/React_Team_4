@@ -1,16 +1,33 @@
-import axios from 'axios';
+import axios from "axios";
 
 const API_BASE_URL = "http://localhost:3001";
 
-const fetchStats = () => {
-  return axios.get(`${API_BASE_URL}/stats`).then(({data}) => data);
+const ENDPOINTS = {
+  stats: "stats",
+  courses: "courses",
+  instructors: "instructors",
 };
 
-const fetchCourses = () => {
-  return axios.get(`${API_BASE_URL}/courses`).then(({data}) => data);
-};
+ const fetchStats = () =>
+  axios.get(`${API_BASE_URL}/${ENDPOINTS.stats}`).then(({ data }) => data);
+
+ const fetchCourses = () =>
+  axios.get(`${API_BASE_URL}/${ENDPOINTS.courses}`).then(({ data }) => data);
+
+
+ const fetchCourse = (id) =>{
+   return( axios
+    .get(`${API_BASE_URL}/${ENDPOINTS.courses}/${id}`)
+    .then(({ data }) => data)
+ )
+   }
+
+ 
 
 export {
   fetchStats,
-  fetchCourses
+  fetchCourses,
+  fetchCourse
 };
+
+

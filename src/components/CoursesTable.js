@@ -1,10 +1,10 @@
 import React from "react";
-// import { Table } from 'reactstrap';
+import {Link} from "react-router-dom";
 import { Button } from 'reactstrap';
 
 
 
-const CoursesTable = ({ title, open, price, dates }) => {
+const CoursesTable = ({ title, open, price, dates,id }) => {
   return (
 
 
@@ -17,7 +17,7 @@ const CoursesTable = ({ title, open, price, dates }) => {
       </td>
       <td>{price.normal} €</td>
       <td>{dates.start_date} - {dates.end_date}</td>
-      <td><Button color="info">View</Button></td>
+      <td><Button tag={Link} to={`/courses/${id}`} color="info">View Details</Button></td>
 
     </tr>
 
