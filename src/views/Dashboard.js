@@ -6,12 +6,6 @@ import {Link} from "react-router-dom";
 import Loader from '../components/Loader'
 import Stats from "../components/Stats";
 
-
-
-
-
-
-
 const Dashboard = () => {
   const [stats, setStats] = useState([]);
   const [courses, setCourses] = useState([]);
@@ -36,7 +30,6 @@ const Dashboard = () => {
           <strong>Manage everything and have fun!</strong>
         </h3>
          
-        
       </Jumbotron>
 
       </div> 
@@ -49,8 +42,7 @@ const Dashboard = () => {
             <Col key={id} className="pr-5 pl-5 pb-5 pt-5 " xs={12} sm={6} md={3}>
                   <Stats  title={title} amount= {amount} />
             </Col>
-            
-            
+             
           ))
         ) : (
           <Col xs={12}>
@@ -82,8 +74,7 @@ const Dashboard = () => {
           </tr>
         </thead>
         <tbody>
-
-          
+ 
           {courses.map((data) => <CoursesTable key={data.id} {...data} />)}
         
             
@@ -97,9 +88,7 @@ const Dashboard = () => {
           
           </tr>
         </tbody>
-        
-       
-        
+ 
       </Table>
     </div>
   );
