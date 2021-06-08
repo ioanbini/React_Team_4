@@ -18,7 +18,7 @@ const CourseEntry = ({
   const endDateFormatted = new Date(end_date).toLocaleDateString("el-gr");
   const bgImageStyle = {
     
-    height: '40rem',
+    height: '50rem',
     background: `url(${imagePath}) no-repeat window`,
     backgroundSize: '100% 100% ',
     
@@ -30,7 +30,7 @@ const CourseEntry = ({
   return (
     <>
       <Row>
-        <Col xs={12}>
+        <Col className="pr-4 pl-4 " xs={12}>
           <h1>
             {title} <small>({id})</small>
           </h1>
@@ -39,11 +39,11 @@ const CourseEntry = ({
       </Row>
       <hr />
       <Row>
-        <Col xs={6}>
+        <Col className="pr-4 pl-4 " xs={6}>
           <h4>Price: {price.normal} €</h4>
           <h4>Bookable: {open ? "✔" : "✖"}</h4>
         </Col>
-        <Col xs={6}>
+        <Col className="pr-4 pl-4 " xs={6}>
           <h4 className="text-right">Duration: {duration}</h4>
           <h4 className="text-right">
             Dates: {startDateFormatted} - {endDateFormatted}
@@ -51,7 +51,7 @@ const CourseEntry = ({
         </Col>
       </Row>
       <Row>
-        <Col xs={12}>
+        <Col className="pr-4 pl-4 " xs={12}>
           <div
             className="lead m-top"
             dangerouslySetInnerHTML={{ __html: description }}
