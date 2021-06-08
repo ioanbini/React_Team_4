@@ -1,29 +1,41 @@
-import axios from 'axios';
-import { useState } from 'react';
+import axios from "axios";
+// import { useState } from 'react';
 
 const API_BASE_URL = "http://localhost:3001";
 
-const fetchStats = () => {
-  return axios.get(`${API_BASE_URL}/stats`).then(({data}) => data);
+const ENDPOINTS = {
+  stats: "stats",
+  courses: "courses",
+  instructors: "instructors",
 };
 
-const fetchCourses = () => {
-  return axios.get(`${API_BASE_URL}/courses`).then(({data}) => data);
-};
+ const fetchStats = () =>
+  axios.get(`${API_BASE_URL}/${ENDPOINTS.stats}`).then(({ data }) => data);
 
-const fetchInstructors = () =>{
-  return axios.get(`${API_BASE_URL}/instructors`).then(({data})=>data);
-}
+ const fetchCourses = () =>
+  axios.get(`${API_BASE_URL}/${ENDPOINTS.courses}`).then(({ data }) => data);
 
-const postCourse = (data) =>
-{
-   
+
+ const fetchCourse = (id) =>{
+  return( axios
+    .get(`${API_BASE_URL}/${ENDPOINTS.courses}/${id}`)
+    .then(({ data }) => data)
+  )
+ }
+
+ const fetchInstructors = () => 
+  axios.get(`${API_BASE_URL}/${ENDPOINTS.instructors}`).then(({ data }) => data);
+
+const postCourse = (data) => {
   console.log("mydat",data)
-  //  axios.post(`${API_BASE_URL}/courses`,data);
+  axios.post(`${API_BASE_URL}/${ENDPOINTS.courses}`,data);
 }
+ 
+
 export {
   fetchStats,
   fetchCourses,
+  fetchCourse,
   fetchInstructors,
   postCourse
 };

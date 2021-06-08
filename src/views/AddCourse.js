@@ -1,18 +1,17 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Button, Form, FormGroup, Label, Input, FormText, Container } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
+//import { FormText} from 'reactstrap'; 
 import { fetchInstructors, postCourse, fetchCourses } from '../api/index';
 
 const AddCourse = () => {
 
   const [instructors, setInstructors] = useState([]);
   const [courses, setCourses] = useState([]);
-
   const [title, setTitle] = useState("");
   const [duration, setDuration] = useState("");
   const [imagePath, setImagePath] = useState("");
   const [bookable, setBookable] = useState(false);
-  const [instructorsData, setInstructorsData] = useState([]);
   const [description, setDescription] = useState("");
   const [dates, setDates] = useState(
     {
@@ -24,16 +23,14 @@ const AddCourse = () => {
     normal: "",
     early_bird: ""
   });
-
+  const [instrSelected, setInstrSelected] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const responseInstructors = await fetchInstructors();
       setInstructors(responseInstructors);
     };
-
     fetchData();
-
   }, []);
 
   const fetchAllCourses = async () => {
@@ -41,9 +38,9 @@ const AddCourse = () => {
     setCourses(responseCourses);
   };
 
-  const submitForm = async (title, duration, imagePath, bookable, instructorsData, description, dates, price) => {
+  const submitForm = async (title, duration, imagePath, bookable, instrSelected, description, dates, price) => {
     fetchAllCourses();
-    const data = { title, duration, imagePath, bookable, instructorsData, description, dates, price }
+    const data = { title, duration, imagePath, bookable, instrSelected, description, dates, price }
     
     console.log(courses)
     const newData = {
@@ -71,19 +68,18 @@ const AddCourse = () => {
       setState(value);
     }
   };
-
-  const setInstructorsDataTemp = (event,instId) => {
-    console.log("id",instId)
-    console.log("before",instructorsData)
-    if (!event.target.checked) {
-      console.log("removing", instId);
-      setInstructorsData(...instructorsData.filter((instructor)=>instructor!==instId));
-    }else {
-      setInstructorsData(...instructorsData, instId);
+  
+  const onCheckboxBtnClick = (selected) => {
+    const index = instrSelected.indexOf(selected);
+    if (index < 0) {
+      instrSelected.push(selected);
+    } else {
+      instrSelected.splice(index, 1);
     }
-
-    
+    setInstrSelected([...instrSelected]);
+    console.log(instrSelected)
   }
+
 
   return (
 
@@ -113,10 +109,9 @@ const AddCourse = () => {
         {instructors.map((data) =>
           <FormGroup check>
             <Label check>
-              <Input type="checkbox" id="checkbox" onChange={(e) => setInstructorsDataTemp(e,data.id)} /> {data.name.first} {data.name.last}
+              <Input type="checkbox" id="checkbox" onClick={() => onCheckboxBtnClick(data.id)} /> {data.name.first} {data.name.last}
             </Label>
           </FormGroup>
-
         )}
 
         <hr />
@@ -143,7 +138,7 @@ const AddCourse = () => {
           <Input type="number" name="normal" id="start" min="0" onChange={(e) => onInputChange(e, setPrice)} />
         </FormGroup>
 
-        <Button className="btn btn-success" onClick={() => submitForm(title, duration, imagePath, bookable, instructorsData, description, dates, price)}>Add Course</Button>
+        <Button className="btn btn-success" onClick={() => submitForm(title, duration, imagePath, bookable, instrSelected, description, dates, price)}>Add Course</Button>
       </Form>
     </Container>
 
