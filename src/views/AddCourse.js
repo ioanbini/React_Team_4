@@ -4,6 +4,9 @@ import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 //import { FormText} from 'reactstrap'; 
 import { fetchInstructors, postCourse, fetchCourses } from '../api/index';
 import SuccessModal from "../components/SuccessModal"
+import { useRouteMatch } from "react-router-dom";
+import { fetchCourse } from "../api";
+
 
 const AddCourse = () => {
   const [
@@ -11,6 +14,7 @@ const AddCourse = () => {
     setIsSuccessfullySubmitted,
   ] = React.useState(false);
 
+  const match = useRouteMatch();
   const [instructors, setInstructors] = useState([]);
   const [courses, setCourses] = useState([]);
   const [title, setTitle] = useState("");
@@ -38,6 +42,35 @@ const AddCourse = () => {
     fetchData();
   }, []);
 
+
+
+  useEffect(() => {
+    const fetshCourse = async () => {
+      const course = await fetchCourse(match.params.id);
+      
+      setTitle(course.title)
+      setDuration(course.duration)
+      setImagePath(course.imagePath)
+      setBookable(course.bookable)
+      // setInstructors(course.instructors)
+      setDescription(course.description)
+      setDates(course.dates.start_date)
+      setDates(course.dates.end_date)
+      setPrice(course.price.normal)
+      setPrice(course.price.early_bird)
+      
+
+      
+      
+      
+      
+      
+    };
+
+    fetshCourse();
+  }, [match.params.id]);
+
+
   const fetchAllCourses = async () => {
     const responseCourses = await fetchCourses()
     setCourses(responseCourses);
@@ -46,11 +79,11 @@ const AddCourse = () => {
   const submitForm = async (title, duration, imagePath, bookable, instrSelected, description, dates, price) => {
     fetchAllCourses();
     const data = { title, duration, imagePath, bookable, instrSelected, description, dates, price }
-    
+
     console.log(courses)
     const newData = {
       ...data,
-      id:Math.max(...courses.map(({id}) => id)) + 1
+      id: Math.max(...courses.map(({ id }) => id)) + 1
     }
     await postCourse(newData);
     setIsSuccessfullySubmitted(newData);
@@ -74,7 +107,7 @@ const AddCourse = () => {
       setState(value);
     }
   };
-  
+
   const onCheckboxBtnClick = (selected) => {
     const index = instrSelected.indexOf(selected);
     if (index < 0) {
@@ -94,28 +127,28 @@ const AddCourse = () => {
         <h3>Add Course</h3>
         <FormGroup>
           <Label for="title">Title</Label>
-          <Input type="text" name="Title" id="title" placeholder="Title" onChange={(e) => onInputChange(e, setTitle)} />
+          <Input value={title} type="text" name="Title" id="title" placeholder="Title" onChange={(e) => onInputChange(e, setTitle)} />
         </FormGroup>
         <FormGroup>
           <Label for="duration">Duration</Label>
-          <Input type="text" name="Duration" id="duration" placeholder="Duration" onChange={(e) => onInputChange(e, setDuration)} />
+          <Input value={duration} type="text" name="Duration" id="duration" placeholder="Duration" onChange={(e) => onInputChange(e, setDuration)} />
         </FormGroup>
         <FormGroup>
           <Label for="image-path">Image Path</Label>
-          <Input type="text" name="image-path" id="image-path" placeholder="Image Path" onChange={(e) => onInputChange(e, setImagePath)} />
+          <Input value={imagePath} type="text" name="image-path" id="image-path" placeholder="Image Path" onChange={(e) => onInputChange(e, setImagePath)} />
         </FormGroup>
         <FormGroup check>
           <Label check>
-            <Input type="checkbox" id="checkbox" onChange={(e) => onInputChange(e, setBookable)} />Bookable
+            <Input value={bookable} type="checkbox" id="checkbox" onChange={(e) => onInputChange(e, setBookable)} />Bookable
           </Label>
         </FormGroup>
         <hr />
 
         <h4>Instructors</h4>
         {instructors.map((data) =>
-          <FormGroup check>
+          <FormGroup key={data.id} check>
             <Label check>
-              <Input type="checkbox" id="checkbox" onClick={() => onCheckboxBtnClick(data.id)} /> {data.name.first} {data.name.last}
+              <Input value={instructors} type="checkbox" id="checkbox" onClick={() => onCheckboxBtnClick(data.id)} /> {data.name.first} {data.name.last}
             </Label>
           </FormGroup>
         )}
@@ -123,32 +156,32 @@ const AddCourse = () => {
         <hr />
         <FormGroup>
           <Label for="description">Description</Label>
-          <Input type="textarea" name="Description" id="description" onChange={(e) => onInputChange(e, setDescription)}></Input>
+          <Input value={description} type="textarea" name="Description" id="description" onChange={(e) => onInputChange(e, setDescription)}></Input>
         </FormGroup>
 
         <hr />
         <FormGroup>
           <h4>Dates</h4>
           <Label for="start">Start Date</Label>
-          <Input type="date" name="start_date" id="start" placeholder="Start Date" onChange={(e) => onInputChange(e, setDates)} />
+          <Input value={dates} type="date" name="start_date" id="start" placeholder="Start Date" onChange={(e) => onInputChange(e, setDates)} />
           <Label for="end">End Date</Label>
-          <Input type="date" name="end_date" id="end" placeholder="End Date" onChange={(e) => onInputChange(e, setDates)} />
+          <Input value={dates} type="date" name="end_date" id="end" placeholder="End Date" onChange={(e) => onInputChange(e, setDates)} />
         </FormGroup>
 
         <hr />
         <FormGroup>
           <h4>Price</h4>
           <Label for="early">Early Bird</Label>
-          <Input type="number" name="early_bird" id="early" min="0" onChange={(e) => onInputChange(e, setPrice)} />
+          <Input value={price.early_bird} type="number" name="early_bird" id="early" min="0" onChange={(e) => onInputChange(e, setPrice)} />
           <Label for="normal">Normal Price</Label>
-          <Input type="number" name="normal" id="start" min="0" onChange={(e) => onInputChange(e, setPrice)} />
+          <Input value={price.normal} type="number" name="normal" id="start" min="0" onChange={(e) => onInputChange(e, setPrice)} />
         </FormGroup>
 
         <Button className="btn btn-success" onClick={() => submitForm(title, duration, imagePath, bookable, instrSelected, description, dates, price)}>Add Course</Button>
       </Form>
       {isSuccessfullySubmitted && (
-  <div ><SuccessModal/></div>
-)}
+        <div ><SuccessModal /></div>
+      )}
     </Container>
 
   );

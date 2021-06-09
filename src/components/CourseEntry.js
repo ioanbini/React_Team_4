@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col, Button } from "reactstrap";
+import {Link} from "react-router-dom";
 
 const CourseEntry = ({
   id,
@@ -57,11 +58,12 @@ const CourseEntry = ({
             dangerouslySetInnerHTML={{ __html: description }}
           />
           <div className="clearfix">
-            <Button color="primary" size="large" onClick={handleEdit}>
+            <Button color="primary"  size="large"  onClick={(()=>handleEdit())}>
+            
               Edit
             </Button>
             &nbsp;
-            <Button color="danger" size="large" onClick={()=>handleDelete(id)}>
+            <Button color="danger" size="large" tag={Link} to={`/courses`} onClick={()=>handleDelete(id)}>
               Delete
             </Button>
             &nbsp;

@@ -4,6 +4,7 @@ import CourseEntry from "../components/CourseEntry";
 import { fetchCourse,deleteCourse,fetchInstructor } from "../api";
 import Loader from "../components/Loader";
 
+
 const Course = () => {
   const match = useRouteMatch();
   const [course, setCourse] = useState(null);
@@ -32,8 +33,8 @@ const Course = () => {
   // }, [match.params.id]);
 
 
-  const handleEdit = (e) => {
-    e.preventDefault();
+  const handleEdit = () => {
+    
     console.log("handle edit");
   };
   const handleDelete = async (id) => {

@@ -35,10 +35,15 @@ const deleteCourse = (id) =>{
   
  }
 
+ const updateCourse = (data,id) => {
+  console.log("mydat",data)
+  axios.post(`${API_BASE_URL}/${ENDPOINTS.courses}/${id}`,data);
+}
 
- const fetchInstructor = () => 
- axios.get("http://localhost:3001/instructors/01").then(({ data }) => data);
-  // axios.get(`${API_BASE_URL}/${ENDPOINTS.instructors}/${id}`).then(({ data }) => data);
+
+//  const fetchInstructor = () => 
+//  axios.get("http://localhost:3001/instructors/01").then(({ data }) => data);
+
  
 
 export {
@@ -48,6 +53,6 @@ export {
   fetchInstructors,
   postCourse,
   deleteCourse,
-  fetchInstructor
+  updateCourse
 
 };

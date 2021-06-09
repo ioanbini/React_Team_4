@@ -6,6 +6,7 @@ import Course from './views/Course';
 import AddCourse from './views/AddCourse';
 import Header from './components/Header';
 
+
 const App = () => {
   return (
     
@@ -16,6 +17,7 @@ const App = () => {
         <Route exact path="/courses"><Courses /></Route>
         <Route exact path="/courses/:id"><Course /></Route>
         <Route exact path="/add-course"><AddCourse /></Route>
+        <Route exact path="/edit-course/:id"><AddCourse /></Route>
       </Switch>
     </BrowserRouter>
     
