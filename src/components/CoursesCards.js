@@ -3,9 +3,11 @@ import { Card, Button, CardTitle,CardText,CardBody } from 'reactstrap';
 import {Link} from "react-router-dom";
 
 
-const CoursesCards = ({title, imagePath, price, dates,duration,id}) => {
+
    
 
+const CoursesCards = ({title, imagePath, price, dates,duration,id}) => {
+   
     return (
         <>
      
@@ -13,7 +15,7 @@ const CoursesCards = ({title, imagePath, price, dates,duration,id}) => {
             <CardBody >
                 <CardTitle tag="h5">{title}</CardTitle>
             </CardBody>
-            <img width="100%" src={imagePath} alt="Card image cap" />
+            <img  src={imagePath} alt="Card cap" />
             <CardBody>
                 <CardText>Price: {price.normal} | Bookable: €  ✔ </CardText>
                 <CardTitle>{duration} </CardTitle>

@@ -16,18 +16,25 @@ const ENDPOINTS = {
 
 
  const fetchCourse = (id) =>{
-   return( axios
+  return( axios
     .get(`${API_BASE_URL}/${ENDPOINTS.courses}/${id}`)
     .then(({ data }) => data)
- )
-   }
+  )
+ }
 
+ const fetchInstructors = () => 
+  axios.get(`${API_BASE_URL}/${ENDPOINTS.instructors}`).then(({ data }) => data);
+
+const postCourse = (data) => {
+  console.log("mydat",data)
+  axios.post(`${API_BASE_URL}/${ENDPOINTS.courses}`,data);
+}
  
 
 export {
   fetchStats,
   fetchCourses,
-  fetchCourse
+  fetchCourse,
+  fetchInstructors,
+  postCourse
 };
-
-
