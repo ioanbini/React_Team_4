@@ -5,7 +5,6 @@ import Courses from './views/Courses';
 import Course from './views/Course';
 import AddCourse from './views/AddCourse';
 import Header from './components/Header';
-import CoursesCards from './components/CoursesCards'
 
 const App = () => {
   return (

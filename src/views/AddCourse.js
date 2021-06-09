@@ -3,8 +3,13 @@ import { useState, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 //import { FormText} from 'reactstrap'; 
 import { fetchInstructors, postCourse, fetchCourses } from '../api/index';
+import SuccessModal from "../components/SuccessModal"
 
 const AddCourse = () => {
+  const [
+    isSuccessfullySubmitted,
+    setIsSuccessfullySubmitted,
+  ] = React.useState(false);
 
   const [instructors, setInstructors] = useState([]);
   const [courses, setCourses] = useState([]);
@@ -48,6 +53,7 @@ const AddCourse = () => {
       id:Math.max(...courses.map(({id}) => id)) + 1
     }
     await postCourse(newData);
+    setIsSuccessfullySubmitted(newData);
   };
 
   const onInputChange = (event, setState) => {
@@ -140,6 +146,9 @@ const AddCourse = () => {
 
         <Button className="btn btn-success" onClick={() => submitForm(title, duration, imagePath, bookable, instrSelected, description, dates, price)}>Add Course</Button>
       </Form>
+      {isSuccessfullySubmitted && (
+  <div ><SuccessModal/></div>
+)}
     </Container>
 
   );
