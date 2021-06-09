@@ -41,7 +41,7 @@ const CourseEntry = ({
       <Row>
         <Col className="pr-4 pl-4 " xs={6}>
           <h4>Price: {price.normal} €</h4>
-          <h4>Bookable: {open ? "✔" : "✖"}</h4>
+          <h4>Bookable: {open ? "✔" : "❌"}</h4>
         </Col>
         <Col className="pr-4 pl-4 " xs={6}>
           <h4 className="text-right">Duration: {duration}</h4>
