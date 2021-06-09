@@ -61,7 +61,7 @@ const CourseEntry = ({
               Edit
             </Button>
             &nbsp;
-            <Button color="danger" size="large" onClick={handleDelete}>
+            <Button color="danger" size="large" onClick={()=>handleDelete(id)}>
               Delete
             </Button>
             &nbsp;
