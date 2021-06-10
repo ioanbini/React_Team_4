@@ -32,8 +32,7 @@ const Dashboard = () => {
          
       </Jumbotron>
 
-      </div> 
-
+    </div> 
       <Row >
       
         {stats.length ? (
@@ -75,9 +74,7 @@ const Dashboard = () => {
         </thead>
         <tbody>
  
-          {courses.map((data) => <CoursesTable key={data.id} {...data} />)}
-        
-            
+          {courses.slice(-5).map((data) => <CoursesTable key={data.id} {...data} />)}
           <tr >
             <td colSpan="6" >
               <Button tag={Link} to="/courses" className="float-right" color="primary">View All</Button>
@@ -85,7 +82,6 @@ const Dashboard = () => {
             
 
             </td>
-          
           </tr>
         </tbody>
  

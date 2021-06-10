@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col, Button } from "reactstrap";
+import {Link} from "react-router-dom";
 
 const CourseEntry = ({
   id,
@@ -41,7 +42,7 @@ const CourseEntry = ({
       <Row>
         <Col className="pr-4 pl-4 " xs={6}>
           <h4>Price: {price.normal} €</h4>
-          <h4>Bookable: {open ? "✔" : "✖"}</h4>
+          <h4>Bookable: {open ? "✔" : "❌"}</h4>
         </Col>
         <Col className="pr-4 pl-4 " xs={6}>
           <h4 className="text-right">Duration: {duration}</h4>
@@ -54,14 +55,15 @@ const CourseEntry = ({
         <Col className="pr-4 pl-4 " xs={12}>
           <div
             className="lead m-top"
-            dangerouslySetInnerHTML={{ __html: description }}
+            dangerouslySetInnerHTML={{ __html: description }} 
           />
           <div className="clearfix">
-            <Button color="primary" size="large" onClick={handleEdit}>
+            <Button color="primary"  size="large" tag={Link} to={`/edit-course/${id}`}  onClick={(()=>handleEdit())}>
+            
               Edit
             </Button>
             &nbsp;
-            <Button color="danger" size="large" onClick={handleDelete}>
+            <Button color="danger" size="large" tag={Link} to={`/courses`} onClick={()=>handleDelete(id)}>
               Delete
             </Button>
             &nbsp;
