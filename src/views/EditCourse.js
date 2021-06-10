@@ -2,43 +2,44 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 //import { FormText} from 'reactstrap'; 
-import { fetchInstructors, postCourse, fetchCourses } from '../api/index';
+import { fetchInstructors, postCourse, fetchCourses, updateCourse } from '../api/index';
 import SuccessModal from "../components/SuccessModal"
 import { useRouteMatch } from "react-router-dom";
-import { fetchCourse } from "../api";
+import { fetchCourse,putCourse } from "../api";
 
 
-const AddCourse = () => {
+const EditCourse = () => {
   const [
     isSuccessfullySubmitted,
     setIsSuccessfullySubmitted,
   ] = React.useState(false);
 
   const match = useRouteMatch();
-  const [allInstructors, setAllInstructors] = useState([]);
+  const [AllInstructors, setAllInsructors] = useState([]);
   const [courses, setCourses] = useState([]);
   const [title, setTitle] = useState("");
   const [duration, setDuration] = useState("");
   const [imagePath, setImagePath] = useState("");
   const [open, setOpen] = useState(false);
   const [description, setDescription] = useState("");
+  const [id,setId]=useState("0");
   const [dates, setDates] = useState(
     {
       start_date: "",
       end_date: ""
     }
   );
-  const [editMode,setEditMode] = useState(false);
+  
   const [price, setPrice] = useState({
     normal: "",
     early_bird: ""
   });
-  const [instructors, setInstructors] = useState([]);
+  const [instructors, setInstructor] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const responseInstructors = await fetchInstructors();
-      setAllInstructors(responseInstructors);
+      setAllInsructors(responseInstructors);
     };
     fetchData();
   }, []);
@@ -53,7 +54,7 @@ const AddCourse = () => {
       setDuration(course.duration)
       setImagePath(course.imagePath)
       setOpen(course.open)
-
+      setId(course.id)
       //setInstructors(course.instructors)
       //console.log(instructors)
       setDescription(course.description)
@@ -71,21 +72,23 @@ const AddCourse = () => {
   }, [match.params.id]);
 
 
-  const fetchAllCourses = async () => {
-    const responseCourses = await fetchCourses()
-    setCourses(responseCourses);
-  };
+  // const fetchAllCourses = async () => {
+  //   const responseCourses = await fetchCourses()
+  //   setCourses(responseCourses);
+  // };
 
   const submitForm = async (title, duration, imagePath, open, instructors, description, dates, price) => {
-    fetchAllCourses();
+    //fetchAllCourses();
     const data = { title, duration, imagePath, open, instructors, description, dates, price }
-
+   
     console.log(courses)
     const newData = {
       ...data,
-      id: Math.max(...courses.map(({ id }) => id)) + 1
+      id:id
     }
-    await postCourse(newData);
+    await updateCourse(newData,id);
+    
+
     //fetchAllCourses();
     setIsSuccessfullySubmitted(newData);
   };
@@ -116,8 +119,8 @@ const AddCourse = () => {
     } else {
       instructors.splice(index, 1);
     }
-    setInstructors([...instructors]);
-    //console.log(instrSelected)
+    setInstructor([...instructors]);
+    console.log(instructors)
   }
 
 
@@ -125,7 +128,7 @@ const AddCourse = () => {
 
     <Container className="themed-container" fluid="sm">
       <Form className="bg-light p-3 mb-2" >
-        <h3>Add Course</h3>
+        <h3>Edit Course</h3>
         <FormGroup>
           <Label for="title">Title</Label>
           <Input value={title} type="text" name="Title" id="title" placeholder="Title" onChange={(e) => onInputChange(e, setTitle)} />
@@ -146,10 +149,10 @@ const AddCourse = () => {
         <hr />
 
         <h4>Instructors</h4>
-        {allInstructors.map((data) =>
+        {AllInstructors.map((data) =>
           <FormGroup key={data.id} check>
             <Label check>
-              <Input value={allInstructors} type="checkbox" id="checkbox" onClick={() => onCheckboxBtnClick(data.id)} /> {data.name.first} {data.name.last}
+              <Input value={AllInstructors} type="checkbox" id="checkbox" onClick={() => onCheckboxBtnClick(data.id)} /> {data.name.first} {data.name.last}
             </Label>
           </FormGroup>
         )}
@@ -178,7 +181,7 @@ const AddCourse = () => {
           <Input value={price.normal} type="number" name="normal" id="start" min="0" onChange={(e) => onInputChange(e, setPrice)} />
         </FormGroup>
 
-        <Button className="btn btn-success" onClick={() => submitForm(title, duration, imagePath, open, instructors, description, dates, price)}>Add Course</Button>
+        <Button className="btn btn-success" onClick={() => submitForm(title, duration, imagePath, open, instructors, description, dates, price)}>Save Course</Button>
       </Form>
       {isSuccessfullySubmitted && (
         <div ><SuccessModal /></div>
@@ -188,4 +191,4 @@ const AddCourse = () => {
   );
 };
 
-export default AddCourse;
+export default EditCourse;

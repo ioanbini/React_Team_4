@@ -8,7 +8,8 @@ import Loader from "../components/Loader";
 const Course = () => {
   const match = useRouteMatch();
   const [course, setCourse] = useState(null);
-  const[instructor,setInstructor]=useState(null);
+  const[instructors,setInstructors]=useState([]);
+  
   useEffect(() => {
     const getCourse = async () => {
       const course = await fetchCourse(match.params.id);
@@ -20,20 +21,6 @@ const Course = () => {
 
     getCourse();
   }, [match.params.id]);
-
-  useEffect(() => {
-    const getInstructor = async () => {
-      const instructor = await fetchInstructor(match.params.id);
-
-      setInstructor(instructor);
-     
-      
-      
-    };
-
-    getInstructor()
-  }, [match.params.id]);
-
 
 
   const handleEdit = () => {

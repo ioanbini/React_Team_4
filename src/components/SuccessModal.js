@@ -20,12 +20,9 @@ const SuccessModal = (props) => {
     <div>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalBody toggle={toggle}>
-            <Alert color="success">
-            Form Submited Successfully!!!
-      </Alert></ModalBody>
-        <ModalFooter>
-          <Button color="primary"tag={Link} to={`/courses`} onClick={toggle}>OK</Button>
-        </ModalFooter>
+            Form Submited Successfully!!! <br/>
+            <Button className="float-right"color="primary"tag={Link} to={`/courses`} onClick={toggle}>OK</Button>
+      </ModalBody>
       </Modal>
     </div>
   );
