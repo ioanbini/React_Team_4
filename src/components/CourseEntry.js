@@ -55,10 +55,10 @@ const CourseEntry = ({
         <Col className="pr-4 pl-4 " xs={12}>
           <div
             className="lead m-top"
-            dangerouslySetInnerHTML={{ __html: description }}
+            dangerouslySetInnerHTML={{ __html: description }} 
           />
           <div className="clearfix">
-            <Button color="primary"  size="large"  onClick={(()=>handleEdit())}>
+            <Button color="primary"  size="large" tag={Link} to={`/edit-course/${id}`}  onClick={(()=>handleEdit())}>
             
               Edit
             </Button>

@@ -160,12 +160,12 @@ const AddCourse = () => {
         </FormGroup>
 
         <hr />
-        <FormGroup>
+        <FormGroup >
           <h4>Dates</h4>
           <Label for="start">Start Date</Label>
-          <Input value={dates} type="date" name="start_date" id="start" placeholder="Start Date" onChange={(e) => onInputChange(e, setDates)} />
+          <Input value={dates.start_date}  type="date" name="start_date" id="start" placeholder="Start Date" onChange={(e) => onInputChange(e, setDates)} />
           <Label for="end">End Date</Label>
-          <Input value={dates} type="date" name="end_date" id="end" placeholder="End Date" onChange={(e) => onInputChange(e, setDates)} />
+          <Input value={dates.end_date} type="date" name="end_date" id="end" placeholder="End Date" onChange={(e) => onInputChange(e, setDates)} />
         </FormGroup>
 
         <hr />
