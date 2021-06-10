@@ -41,10 +41,12 @@ const deleteCourse = (id) =>{
 }
 
 
-//  const fetchInstructor = () => 
-//  axios.get("http://localhost:3001/instructors/01").then(({ data }) => data);
 
- 
+
+const fetchInstructor = (data) => 
+// console.log("mydat",data)
+axios.get(`${API_BASE_URL}/${ENDPOINTS.instructors}/?id=01&&id=02`).then(({ data}) => data);
+
 
 export {
   fetchStats,
@@ -53,6 +55,7 @@ export {
   fetchInstructors,
   postCourse,
   deleteCourse,
-  updateCourse
+  updateCourse,
+  fetchInstructor
 
 };
