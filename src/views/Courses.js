@@ -10,11 +10,11 @@ const Courses = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    const fetshData = async () => {
+    const getData = async () => {
       const [responseStats, responseCourses] = await Promise.all([fetchStats(), fetchCourses()]);
       setCourses(responseCourses);
     };
-    fetshData();
+    getData();
   }, []);
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
 import CourseEntry from "../components/CourseEntry";
-import { fetchCourse,deleteCourse,fetchInstructor } from "../api";
+import { fetchCourse,deleteCourse,fetchInstructor, fetchCourses } from "../api";
 import Loader from "../components/Loader";
 
 
@@ -10,7 +10,7 @@ const Course = () => {
   const [course, setCourse] = useState(null);
   const[instructor,setInstructor]=useState(null);
   useEffect(() => {
-    const fetshCourse = async () => {
+    const getCourse = async () => {
       const course = await fetchCourse(match.params.id);
 
       setCourse(course);
@@ -18,11 +18,11 @@ const Course = () => {
       
     };
 
-    fetshCourse();
+    getCourse();
   }, [match.params.id]);
 
   useEffect(() => {
-    const fetsInstructor = async () => {
+    const getInstructor = async () => {
       const instructor = await fetchInstructor(match.params.id);
 
       setInstructor(instructor);
@@ -31,7 +31,7 @@ const Course = () => {
       
     };
 
-    fetsInstructor()
+    getInstructor()
   }, [match.params.id]);
 
 
@@ -43,6 +43,7 @@ const Course = () => {
   const handleDelete = async (id) => {
     
     await deleteCourse(id)
+    //await fetchCourses()
   };
 
   return (

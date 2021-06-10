@@ -45,7 +45,7 @@ const AddCourse = () => {
 
 
   useEffect(() => {
-    const fetshCourse = async () => {
+    const getCourse = async () => {
       const course = await fetchCourse(match.params.id);
       
       setTitle(course.title)
@@ -56,18 +56,14 @@ const AddCourse = () => {
       setDescription(course.description)
       setDates(course.dates.start_date)
       setDates(course.dates.end_date)
-      setPrice(course.price.normal)
-      setPrice(course.price.early_bird)
-      
-
-      
-      
-      
-      
+      setPrice({
+        normal: course.price.normal,
+        early_bird: course.price.early_bird
+      });
       
     };
 
-    fetshCourse();
+    getCourse();
   }, [match.params.id]);
 
 
@@ -86,6 +82,7 @@ const AddCourse = () => {
       id: Math.max(...courses.map(({ id }) => id)) + 1
     }
     await postCourse(newData);
+    //fetchAllCourses();
     setIsSuccessfullySubmitted(newData);
   };
 

@@ -98,6 +98,23 @@
         "01"
       ],
       "description": "<p>This is a certified program by Athens Tech College, the first educational institution in Greece that specialises in computer science and ICT studies.</p><p>Participant’s registration (payment’s completion) implies full compliance and acceptance of Code.Learn Terms &amp; Conditions.</p>"
+    },
+    {
+      "title": "",
+      "duration": "",
+      "imagePath": "",
+      "bookable": false,
+      "instrSelected": [],
+      "description": "",
+      "dates": {
+        "start_date": "",
+        "end_date": ""
+      },
+      "price": {
+        "normal": "",
+        "early_bird": ""
+      },
+      "id": "26uc44Q"
     }
   ],
   "instructors": [
