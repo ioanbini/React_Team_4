@@ -45,30 +45,30 @@ const AddCourse = () => {
 
 
 
-  useEffect(() => {
-    const getCourse = async () => {
-      const course = await fetchCourse(match.params.id);
+  // useEffect(() => {
+  //   const getCourse = async () => {
+  //     const course = await fetchCourse(match.params.id);
       
-      setTitle(course.title)
-      setDuration(course.duration)
-      setImagePath(course.imagePath)
-      setOpen(course.open)
+  //     setTitle(course.title)
+  //     setDuration(course.duration)
+  //     setImagePath(course.imagePath)
+  //     setOpen(course.open)
 
-      //setInstructors(course.instructors)
-      //console.log(instructors)
-      setDescription(course.description)
-      setDates({
-        start_date:course.dates.start_date,
-        end_date:course.dates.end_date})
-      setPrice({
-        normal: course.price.normal,
-        early_bird: course.price.early_bird
-      });
+  //     //setInstructors(course.instructors)
+  //     //console.log(instructors)
+  //     setDescription(course.description)
+  //     setDates({
+  //       start_date:course.dates.start_date,
+  //       end_date:course.dates.end_date})
+  //     setPrice({
+  //       normal: course.price.normal,
+  //       early_bird: course.price.early_bird
+  //     });
       
-    };
+  //   };
 
-    getCourse();
-  }, [match.params.id]);
+  //   getCourse();
+  // }, [match.params.id]);
 
 
   const fetchAllCourses = async () => {

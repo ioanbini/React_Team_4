@@ -55,7 +55,7 @@ const EditCourse = () => {
       setImagePath(course.imagePath)
       setOpen(course.open)
       setId(course.id)
-      //setInstructors(course.instructors)
+      setInstructor(course.instructors)
       //console.log(instructors)
       setDescription(course.description)
       setDates({
